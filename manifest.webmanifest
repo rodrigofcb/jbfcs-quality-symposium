@@ -1,0 +1,16 @@
+{
+  "name": "Quality Symposium Flow Guide",
+  "short_name": "Flow Guide",
+  "description": "Schedule, rooms and finalist list for the Quality Symposium Flow Coordinators.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f1eee7",
+  "theme_color": "#2261ae",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

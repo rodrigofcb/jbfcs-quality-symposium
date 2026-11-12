@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quality Symposium Flow Guide</title>
+<meta name="theme-color" content="#2261ae">
+<meta name="robots" content="noindex, nofollow">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Flow Guide">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<style>
+:root{
+  --orange:#f36c21; --yellow:#faa21b; --blue:#2261ae; --calm:#a1c1e6;
+  --purple:#a3238e; --lav:#dd9dc6; --green:#1a5a40; --spring:#d6e040;
+  --brick:#b04c32; --soft:#f1eee7; --ink:#231f20; --white:#fff;
+  --serif:"Mackinac Pro",Lora,Georgia,"Times New Roman",serif;
+  --sans:Indivisible,Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--soft);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.33;text-align:left;
+  padding-bottom:calc(76px + env(safe-area-inset-bottom))}
+h1,h2,h3{font-family:var(--serif);font-weight:500;margin:0}
+button{font-family:inherit;font-size:inherit;color:inherit}
+header{background:var(--blue);color:var(--white);padding:calc(12px + env(safe-area-inset-top)) 16px 12px;
+  border-bottom:5px solid var(--orange);position:sticky;top:0;z-index:5;display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+header h1{font-size:21px;line-height:1.15}
+header .sub{font-size:14px;margin-top:2px}
+#clock{font-family:var(--serif);font-size:30px;line-height:1;white-space:nowrap;font-variant-numeric:tabular-nums}
+#clock small{font-family:var(--sans);font-size:14px;margin-left:3px}
+main{padding:14px 14px 8px;max-width:640px;margin:0 auto}
+section{display:none}
+section.on{display:block}
+.label{font-weight:900;text-transform:uppercase;font-size:13px;letter-spacing:.06em;margin:18px 2px 8px}
+.label:first-child{margin-top:4px}
+.card{background:var(--white);border-radius:22px;padding:16px;margin-bottom:12px;border:2px solid var(--white)}
+.card.now{border-color:var(--orange)}
+.card.next{border-color:var(--calm)}
+.card.done{background:var(--soft);border-color:var(--calm)}
+.time{font-weight:600;color:var(--blue);font-size:15px}
+.card h2{font-size:24px;line-height:1.15;margin:4px 0 6px}
+.card.small h2{font-size:20px}
+.where{display:inline-block;background:var(--blue);color:var(--white);border-radius:999px;padding:4px 12px;font-size:14px;font-weight:600;margin:2px 6px 6px 0}
+.where.alt{background:var(--green)}
+.left{font-weight:600;color:var(--brick);font-size:15px}
+ul{margin:8px 0 0;padding-left:20px}
+li{margin-bottom:6px}
+.say{margin-top:12px;border-left:5px solid var(--purple);padding:2px 0 2px 12px}
+.say .t{font-weight:900;text-transform:uppercase;font-size:13px;letter-spacing:.06em;color:var(--purple);margin-bottom:4px}
+.say p{font-family:var(--serif);font-size:19px;line-height:1.3;margin:0 0 10px}
+.say p:last-child{margin-bottom:0}
+.btn{display:block;width:100%;text-align:left;background:var(--orange);color:var(--ink);border:0;border-radius:16px;padding:14px 16px;font-weight:600;margin-top:12px;min-height:48px}
+.btn.ghost{background:var(--white);border:2px solid var(--blue);color:var(--blue)}
+.tip{background:var(--spring);border-radius:22px;padding:14px 16px;margin-bottom:12px}
+.tip b{display:block;margin-bottom:2px}
+.chip{float:right;font-size:13px;font-weight:600;border-radius:999px;padding:2px 10px;margin-left:8px}
+.chip.now{background:var(--orange)}
+.chip.next{background:var(--calm)}
+.chip.done{background:var(--soft);border:1px solid var(--ink)}
+details summary{list-style:none;cursor:pointer}
+details summary::-webkit-details-marker{display:none}
+details summary h2{font-size:20px}
+.more{font-size:14px;font-weight:600;color:var(--blue);margin-top:4px}
+details[open] .more{display:none}
+.room h2{font-size:24px;margin-bottom:2px}
+.person{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-top:1px solid var(--calm);width:100%;background:none;border-left:0;border-right:0;border-bottom:0;text-align:left;min-height:48px}
+.box{flex:0 0 30px;height:30px;border:2px solid var(--blue);border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:900;color:var(--white);margin-top:2px}
+.person.ok .box{background:var(--green);border-color:var(--green)}
+.person.ok .nm{text-decoration:line-through}
+.nm{font-weight:600;font-size:18px}
+.ro{font-size:14px}
+.po{font-size:14px;color:var(--blue);font-weight:600}
+.stops{position:relative;margin:0;padding:0;list-style:none}
+.stops li{position:relative;padding:0 0 16px 34px;margin:0}
+.stops li::before{content:"";position:absolute;left:9px;top:8px;bottom:-8px;width:3px;background:var(--calm)}
+.stops li:last-child::before{display:none}
+.stops li::after{content:"";position:absolute;left:2px;top:3px;width:17px;height:17px;border-radius:50%;background:var(--blue)}
+.stops li.p::after{background:var(--orange)}
+.stops li.b::after{background:var(--purple)}
+.stops li.m::after{background:var(--green)}
+.stops b{font-size:18px}
+.stops span{display:block;font-size:15px}
+.key{font-size:14px;margin-top:6px}
+.key i{display:inline-block;width:12px;height:12px;border-radius:50%;margin:0 5px 0 10px;vertical-align:-1px}
+.key i:first-child{margin-left:0}
+nav{position:fixed;left:0;right:0;bottom:0;background:var(--white);border-top:2px solid var(--calm);display:flex;z-index:6;padding-bottom:env(safe-area-inset-bottom)}
+nav button{flex:1;background:none;border:0;padding:10px 2px 9px;font-size:13px;font-weight:600;min-height:62px;border-top:5px solid var(--white);color:var(--ink)}
+nav button svg{display:block;margin:0 auto 3px;width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+nav button.on{color:var(--blue);border-top-color:var(--orange)}
+#preview{display:none;background:var(--yellow);padding:8px 16px;font-size:14px;font-weight:600}
+</style>
+</head>
+<body>
+<header>
+  <div><h1>Quality Symposium</h1><div class="sub">Flow Coordinator guide</div></div>
+  <div id="clock" aria-live="off">--:--</div>
+</header>
+<div id="preview"></div>
+<main>
+  <section id="v-now" class="on"></section>
+  <section id="v-schedule"></section>
+  <section id="v-finalists"></section>
+  <section id="v-places">
+    <div class="label">Walking order along the corridor</div>
+    <div class="card">
+      <ol class="stops">
+        <li class="m"><b>Main Room 220</b><span>Open &amp; Welcome, keynote, panel, Recognition Ceremony</span></li>
+        <li><b>Food area</b><span>Refreshments and water, right outside Room 220. Lunch is served in the hallway.</span></li>
+        <li><b>Corridor</b><span>Long hallway with the orange wall and framed art</span></li>
+        <li class="p"><b>Room 290</b><span>3 posters</span></li>
+        <li class="p"><b>Room 285</b><span>3 posters</span></li>
+        <li class="p"><b>Room 280</b><span>6 posters</span></li>
+        <li><b>Registration and coat check</b><span>Welcome table and coat rack</span></li>
+        <li><b>Elevators</b><span>Next to registration</span></li>
+        <li><b>Bathrooms</b><span>Just past the elevators</span></li>
+        <li class="b"><b>Room 269</b><span>Breakout: From Dashboard to Decision (Tannasia Gonzalez)</span></li>
+        <li class="b"><b>Room 270</b><span>Breakout: Good People Can Struggle in Broken Systems (Cranston Darris). End of the hallway, by the window.</span></li>
+      </ol>
+      <div class="key"><i style="background:var(--green)"></i>Main room<i style="background:var(--orange)"></i>Posters<i style="background:var(--purple)"></i>Breakouts</div>
+    </div>
+    <div class="tip"><b>Room full?</b>Send guests to another room: the next poster room during the Gallery Walk, or the other breakout. No need to notify anyone.</div>
+    <div class="card small">
+      <div class="time">Key times</div>
+      <ul>
+        <li>Gallery Walk: 10:45 AM to 12:00 PM</li>
+        <li>Breakouts start: 11:30 AM</li>
+        <li>QR code voting closes: 1:00 PM</li>
+        <li>Keynote: 1:00 PM</li>
+        <li>Panel: 2:10 PM</li>
+        <li>Recognition Ceremony: 3:00 PM</li>
+      </ul>
+    </div>
+  </section>
+</main>
+<nav>
+  <button data-v="now" class="on"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Now</button>
+  <button data-v="schedule"><svg viewBox="0 0 24 24"><path d="M8 6h12M8 12h12M8 18h12"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg>Schedule</button>
+  <button data-v="finalists"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.200-5.500 6.500-5.500s5.900 1.900 6.500 5.500M16 11l2 2 4-4"/></svg>Finalists</button>
+  <button data-v="places"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.200-7-11a7 7 0 0 1 14 0c0 4.800-7 11-7 11z"/><circle cx="12" cy="10" r="2.500"/></svg>Rooms</button>
+</nav>
+<script>
+const FULL = {b:"Room full?", t:"Send guests to another room. No need to notify anyone."};
+const STEPS = [
+ {id:"huddle", s:"07:45", e:"10:00", title:"Volunteer huddle", where:["Registration, near the elevators"],
+  todo:["Join the volunteer huddle at the registration area near the elevators."]},
+ {id:"seat", s:"10:00", e:"10:30", label:"10:00 to 10:24 AM", title:"Move guests to Main Room 220", where:["Corridor","Room 220"],
+  todo:["Start moving guests toward Main Room 220.","Keep the hallway moving: ask guests to take seats.","Point out restrooms, coat check and water."]},
+ {id:"welcome", s:"10:30", e:"10:45", title:"Open & Welcome", where:["Room 220 doors"],
+  todo:["Stay at the Main Room doors for late arrivals.","Seat them without interrupting the welcome."]},
+ {id:"finalists", s:"10:35", e:"10:45", label:"10:35 to 10:40 AM", title:"Send finalists to their posters", where:["Room 220","Rooms 280, 285, 290"],
+  todo:["Quietly notify each finalist in Room 220.","They need to be standing next to their poster before guests arrive at 10:45."], link:true},
+ {id:"gallery", s:"10:45", e:"11:10", title:"Gallery Walk and voting start", where:["Rooms 280, 285, 290"],
+  todo:["Guide guests to Rooms 280, 285 and 290.","Remind guests to scan the QR code and vote on each poster they view. Voting closes at 1:00 PM.","Watch temperature and crowding. Spread guests across the three rooms.","The Gallery Walk runs until 12:00 PM."],
+  say:["We have additional projects in the room next door. Let’s head over so everyone has a chance to see the remaining presentations.",
+       "We’re doing great on time! Let’s keep moving to the next room so we can make the most of our Gallery Walk.",
+       "To help avoid overcrowding, let’s spread out and visit the projects in the adjacent room as well.",
+       "Don’t forget to scan the QR code and vote on each poster you visit."], tip:FULL},
+ {id:"ten", s:"11:10", e:"11:20", title:"Give the “10 minutes left” reminder", where:["Rooms 280, 285, 290","Rooms 269, 270"],
+  todo:["Announce 10 minutes left: finish voting and finish at your poster.","Split up: one of you checks the breakout rooms (269 and 270) while the others cover the Gallery Walk.","Breakout room check: seats, podium, laptop, slides loaded."],
+  say:["Ten minutes left. Please finish your votes and wrap up at your poster."], tip:FULL},
+ {id:"last", s:"11:20", e:"11:25", title:"Last call at the posters", where:["Rooms 280, 285, 290"],
+  todo:["Give the last call at the posters.","Ask guests heading to a breakout to start moving."],
+  say:["Last call at the posters! You can keep voting with the QR code until 1:00 PM. If you’re joining a breakout, let’s start heading over."]},
+ {id:"tobreak", s:"11:25", e:"11:30", title:"Guide guests to the breakouts", where:["Room 270","Room 269"],
+  todo:["Room 270: Cranston Darris.","Room 269: Tannasia Gonzalez.","Everyone should be seated by 11:25 AM. Breakouts start at 11:30 AM."],
+  say:["Room 270 is Good People Can Struggle in Broken Systems, and Room 269 is From Dashboard to Decision. Both start at 11:30."],
+  tip:{b:"Breakout full?", t:"Send guests to the other breakout room. No need to notify anyone."}},
+ {id:"breakouts", s:"11:30", e:"12:00", title:"Breakouts in session", where:["Rooms 269, 270","Rooms 280, 285, 290"],
+  todo:["Breakouts are running in Rooms 269 and 270.","The Gallery Walk continues in Rooms 280, 285 and 290 until 12:00 PM."],
+  tip:{b:"Room full?", t:"Send guests to the other breakout or to the poster rooms. No need to notify anyone."}},
+ {id:"lunch", s:"12:00", e:"12:50", title:"Lunch in the hallway", where:["Hallway"],
+  todo:["Direct guests to lunch in the hallway.","Voting with the QR code stays open until 1:00 PM."],
+  say:["Lunch is served in the hallway. Enjoy!"]},
+ {id:"tokeynote", s:"12:50", e:"13:00", title:"Announce the keynote", where:["Hallway","Room 220"],
+  todo:["Announce that the keynote starts at 1:00 PM.","Guide guests back to Room 220.","Close the lunch area."],
+  say:["The keynote begins at 1:00. Please head back to Room 220 and take a seat."]},
+ {id:"keynote", s:"13:00", e:"14:00", title:"Keynote", where:["Room 220"], quiet:true,
+  todo:["Keynote in session in Room 220.","Voting is now closed."]},
+ {id:"break1", s:"14:00", e:"14:10", title:"Break", where:["Restrooms","Food area","Room 220"],
+  todo:["Guide guests to restrooms and refreshments, then back to Room 220.","The panel starts at 2:10 PM."]},
+ {id:"panel", s:"14:10", e:"14:45", title:"Panel", where:["Room 220"], quiet:true,
+  todo:["Panel in session in Room 220."]},
+ {id:"break2", s:"14:45", e:"15:00", title:"Break", where:["Restrooms","Food area","Room 220"],
+  todo:["Guide guests to restrooms and refreshments, then back to Room 220.","The Recognition Ceremony starts at 3:00 PM."],
+  say:["The Recognition Ceremony begins at 3:00. Please take your seats in Room 220."]},
+ {id:"ceremony", s:"15:00", e:"16:00", title:"Recognition Ceremony", where:["Room 220"], quiet:true,
+  todo:["Recognition Ceremony in session in Room 220."]},
+ {id:"cleanup", s:"16:00", e:"16:30", title:"Clean up", where:["Rooms and corridors"],
+  todo:["Help clean up the rooms and corridors."]}
+];
+const ROOMS = [
+ {room:"Room 280", people:[
+  {n:"Jenna Kesselring", r:"Sr. Director, One Call Contact Center", p:"2 posters: Insurance verification; Consents at registration"},
+  {n:"Laissa Perez", r:"Operations Supervisor, One Call Contact Center", p:"3 posters: Insurance verification; Consents at registration; Wait for intake"},
+  {n:"Andrew Pearson", r:"Chief Medical Officer", p:"Poster: NSSI screening"},
+  {n:"Renee Jones", r:"Senior Director, Children’s Care Coordination & Youth ACT", p:"Poster: NSSI screening"},
+  {n:"Wilfredo Ayala", r:"Senior Team Leader, Cedar Knolls House", p:"Poster: Missed progress notes"},
+  {n:"Alyssa Colon", r:"Social Work Supervisor, Staten Island Children’s BCM", p:"Poster: Full-month billing"}]},
+ {room:"Room 285", people:[
+  {n:"Zhanna Beyl", r:"LCSW, Clinical Supervisor", p:"Poster: Parent/family sessions"},
+  {n:"Gabriela Lugo", r:"Program Supervisor", p:"Poster: Casework contact protocol"},
+  {n:"Michal Gursen", r:"ITS Director", p:"Poster: From 28 clicks to 8"},
+  {n:"Eugene Podborits", r:"VP Clinical Operations", p:"Poster: From 28 clicks to 8"}]},
+ {room:"Room 290", people:[
+  {n:"Larissa De Souza", r:"PMO Operations Manager", p:"Poster: Vehicle trips without fob-in"},
+  {n:"Douglas Junior", r:"Project Lead, DAT Team", p:"Poster: Revenue cycle data pipeline"},
+  {n:"Asisat Oladele", r:"Assistant Director of Residential Services", p:"Poster: Balances over $2,000"}]}
+];
+const TOTAL = ROOMS.reduce((a,r)=>a+r.people.length,0);
+
+const $ = id => document.getElementById(id);
+const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const sec = hm => { const [h,m] = hm.split(":").map(Number); return h*3600+m*60; };
+const fmt = hm => { let [h,m] = hm.split(":").map(Number); const ap = h>=12?"PM":"AM"; h = h%12||12; return h+":"+String(m).padStart(2,"0")+" "+ap; };
+STEPS.forEach(st => { st.ss = sec(st.s); st.es = sec(st.e); });
+
+/* Clock: always New York time. Add ?t=HH:MM to the link to preview a time of day. */
+let offset = 0;
+const nyFmt = new Intl.DateTimeFormat("en-US",{timeZone:"America/New_York",hour12:false,hour:"2-digit",minute:"2-digit",second:"2-digit"});
+function realSecs(){ const p = {}; nyFmt.formatToParts(new Date()).forEach(x=>p[x.type]=x.value); return (Number(p.hour)%24)*3600+Number(p.minute)*60+Number(p.second); }
+const pv = new URLSearchParams(location.search).get("t");
+if (pv && /^\d{1,2}:\d{2}$/.test(pv)) { offset = sec(pv) - realSecs(); $("preview").style.display = "block"; $("preview").textContent = "Preview mode: clock started at " + fmt(pv) + ". Remove ?t= from the link for the real time."; }
+const nowSecs = () => ((realSecs()+offset)%86400+86400)%86400;
+
+function mins(s){ const m = Math.ceil(s/60); if (m < 60) return m + " min"; const h = Math.floor(m/60), r = m%60; return h + " h" + (r ? " " + r + " min" : ""); }
+function when(st){ return st.label || (fmt(st.s) + " to " + fmt(st.e)); }
+
+function body(st){
+  let h = "<ul>" + st.todo.map(t=>"<li>"+esc(t)+"</li>").join("") + "</ul>";
+  if (st.say) h += '<div class="say"><div class="t">Say</div>' + st.say.map(t=>"<p>“"+esc(t)+"”</p>").join("") + "</div>";
+  if (st.link) h += '<button class="btn" data-go="finalists">Open the finalist list</button>';
+  return h;
+}
+const wheres = st => st.where.map((w,i)=>'<span class="where'+(i?" alt":"")+'">'+esc(w)+"</span>").join("");
+
+function renderNow(t){
+  const active = STEPS.filter(s=>s.ss<=t && t<s.es).sort((a,b)=>b.ss-a.ss);
+  const next = STEPS.filter(s=>s.ss>t).sort((a,b)=>a.ss-b.ss)[0];
+  let h = "";
+  if (!active.length && !next) {
+    h = '<div class="card"><h2>The symposium is over</h2><p>Thank you for keeping everything moving today.</p></div>';
+  } else {
+    if (active.length) {
+      h += '<div class="label">Do now</div>';
+      active.forEach(st => {
+        h += '<div class="card now"><div class="time">'+when(st)+'</div><h2>'+esc(st.title)+'</h2>'+wheres(st)+
+             '<div class="left">'+mins(st.es-t)+' left</div>'+body(st)+'</div>';
+        if (st.tip) h += '<div class="tip"><b>'+esc(st.tip.b)+'</b>'+esc(st.tip.t)+'</div>';
+      });
+    } else {
+      h += '<div class="card"><h2>Nothing scheduled yet</h2><p>The first task is below.</p></div>';
+    }
+    if (next) {
+      const soon = next.ss - t <= 300;
+      h += '<div class="label">Up next in '+mins(next.ss-t)+'</div>'+
+           '<div class="card next small"><div class="time">'+when(next)+'</div><h2>'+esc(next.title)+'</h2>'+wheres(next)+
+           (soon ? body(next) : "<ul>"+next.todo.slice(0,1).map(x=>"<li>"+esc(x)+"</li>").join("")+"</ul>")+'</div>';
+    }
+  }
+  h += '<button class="btn ghost" data-go="schedule">See the full schedule</button>';
+  $("v-now").innerHTML = h;
+}
+
+function renderSchedule(t){
+  const next = STEPS.filter(s=>s.ss>t).sort((a,b)=>a.ss-b.ss)[0];
+  let h = '<div class="label">Thursday, November 12 · tap a step for details</div>';
+  STEPS.forEach(st => {
+    const state = t>=st.es ? "done" : (t>=st.ss ? "now" : (next && next.id===st.id ? "next" : ""));
+    const chip = state ? '<span class="chip '+state+'">'+({done:"Done",now:"Now",next:"Next"})[state]+'</span>' : "";
+    h += '<details class="card '+state+'" id="s-'+st.id+'"'+(state==="now"?" open":"")+'><summary>'+chip+
+         '<div class="time">'+when(st)+'</div><h2>'+esc(st.title)+'</h2><div class="more">'+esc(st.where.join(" · "))+'</div></summary>'+
+         wheres(st)+body(st)+'</details>';
+  });
+  $("v-schedule").innerHTML = h;
+}
+
+function loadDone(){ try { return JSON.parse(localStorage.getItem("qs-notified")||"{}"); } catch(e){ return {}; } }
+let done = loadDone();
+function saveDone(){ try { localStorage.setItem("qs-notified", JSON.stringify(done)); } catch(e){} }
+function renderFinalists(){
+  const n = Object.keys(done).filter(k=>done[k]).length;
+  let h = '<div class="tip"><b>Between 10:35 and 10:40 AM</b>Find each finalist in Room 220 and send them to stand next to their poster, before guests arrive at 10:45 AM.</div>'+
+          '<div class="label">'+n+' of '+TOTAL+' notified · tap a name to check it off</div>';
+  ROOMS.forEach(r => {
+    h += '<div class="card room"><span class="where">'+r.people.length+' people</span><h2>'+r.room+'</h2>';
+    r.people.forEach(p => {
+      const k = r.room+"|"+p.n, ok = !!done[k];
+      h += '<button class="person'+(ok?" ok":"")+'" data-k="'+esc(k)+'" aria-pressed="'+ok+'"><span class="box">'+(ok?"✓":"")+'</span>'+
+           '<span><span class="nm">'+esc(p.n)+'</span><br><span class="ro">'+esc(p.r)+'</span><br><span class="po">'+esc(p.p)+'</span></span></button>';
+    });
+    h += "</div>";
+  });
+  h += '<button class="btn ghost" id="reset">Clear all checkmarks</button>'+
+       '<p class="key">Checkmarks are saved on this phone only. Agree with your colleagues who covers which room.</p>';
+  $("v-finalists").innerHTML = h;
+}
+
+function go(v){
+  document.querySelectorAll("section").forEach(s=>s.classList.toggle("on", s.id==="v-"+v));
+  document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("on", b.dataset.v===v));
+  window.scrollTo(0,0);
+  if (v==="schedule") { const el = document.querySelector("#v-schedule details.now") || document.querySelector("#v-schedule details.next"); if (el) el.scrollIntoView({block:"center"}); }
+}
+document.addEventListener("click", e => {
+  const nb = e.target.closest("nav button"); if (nb) return go(nb.dataset.v);
+  const g = e.target.closest("[data-go]"); if (g) return go(g.dataset.go);
+  const p = e.target.closest(".person"); if (p) { done[p.dataset.k] = !done[p.dataset.k]; saveDone(); return renderFinalists(); }
+  if (e.target.id==="reset") { done = {}; saveDone(); renderFinalists(); }
+});
+
+let kNow = "", kSched = "";
+function tick(){
+  const t = nowSecs();
+  let h = Math.floor(t/3600), m = Math.floor(t%3600/60);
+  const ap = h>=12?"PM":"AM"; h = h%12||12;
+  $("clock").innerHTML = h+":"+String(m).padStart(2,"0")+"<small>"+ap+"</small>";
+  const act = STEPS.filter(s=>s.ss<=t && t<s.es).map(s=>s.id).join(",");
+  const a = act+"|"+Math.floor(t/60);
+  if (a!==kNow) { kNow = a; renderNow(t); }
+  const b = act+"|"+STEPS.filter(s=>t>=s.es).length;
+  if (b!==kSched) { kSched = b; renderSchedule(t); }
+}
+renderFinalists(); tick(); setInterval(tick, 1000);
+document.addEventListener("visibilitychange", () => { if (!document.hidden) tick(); });
+if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(()=>{});
+</script>
+</body>
+</html>

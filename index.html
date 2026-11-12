@@ -93,6 +93,17 @@ nav button{flex:1;background:none;border:0;padding:10px 2px 9px;font-size:13px;f
 nav button svg{display:block;margin:0 auto 3px;width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 nav button.on{color:var(--blue);border-top-color:var(--orange)}
 #preview{display:none;background:var(--yellow);padding:8px 16px;font-size:14px;font-weight:600}
+
+.map{width:100%;height:auto;display:block}
+.map text{font-family:var(--sans);font-size:14px;font-weight:600;fill:var(--ink)}
+.map .s{font-size:12px;font-weight:400}
+.map .w{fill:var(--white)}
+.map rect{stroke:var(--calm);stroke-width:2}
+.map .poster{stroke:var(--orange);stroke-width:3}
+.map .brk{stroke:var(--purple);stroke-width:3}
+.map .main{fill:var(--green);stroke:var(--green)}
+.map .hall{fill:var(--soft);stroke:none}
+.map rect.hl{stroke:var(--ink);stroke-width:5;stroke-dasharray:9 5}
 </style>
 </head>
 <body>
@@ -106,6 +117,41 @@ nav button.on{color:var(--blue);border-top-color:var(--orange)}
   <section id="v-schedule"></section>
   <section id="v-finalists"></section>
   <section id="v-places">
+    <div class="label">Floor map · not to scale</div>
+    <div class="card">
+      <svg class="map" viewBox="0 0 360 632" role="img" aria-label="Schematic floor map: Main Room 220 at the top, then the food area, then a corridor with poster rooms 290, 285 and 280 on the window side, then registration, elevators, bathrooms and breakout rooms 269 and 270.">
+        <rect class="hall" x="120" y="138" width="50" height="484"/>
+        <rect class="hall" x="170" y="504" width="180" height="26"/>
+        <rect id="m-corr" x="120" y="138" width="50" height="484" fill="none"/>
+        <rect x="108" y="146" width="6" height="286" style="fill:var(--orange);stroke:none"/>
+        <text class="s" x="10" y="282">Orange wall</text><text class="s" x="10" y="298">with framed art</text>
+        <rect x="352" y="146" width="5" height="286" style="fill:var(--calm);stroke:none"/>
+        <rect id="m-r220" class="main" x="10" y="10" width="340" height="80" rx="14"/>
+        <text x="24" y="46" class="w" style="font-size:18px">Main Room 220</text><text x="24" y="66" class="w s">Welcome, keynote, panel, ceremony</text>
+        <rect id="m-food" x="10" y="98" width="340" height="40" rx="12" fill="#fff"/>
+        <text x="24" y="123">Food area and water</text>
+        <rect id="m-r290" class="poster" x="178" y="146" width="168" height="90" rx="14" fill="#fff"/>
+        <text x="190" y="186" style="font-size:18px">Room 290</text><text x="190" y="206" class="s">3 posters</text>
+        <rect id="m-r285" class="poster" x="178" y="244" width="168" height="90" rx="14" fill="#fff"/>
+        <text x="190" y="284" style="font-size:18px">Room 285</text><text x="190" y="304" class="s">3 posters</text>
+        <rect id="m-r280" class="poster" x="178" y="342" width="168" height="90" rx="14" fill="#fff"/>
+        <text x="190" y="382" style="font-size:18px">Room 280</text><text x="190" y="402" class="s">6 posters</text>
+        <rect id="m-reg" x="10" y="444" width="102" height="64" rx="12" fill="#fff"/>
+        <text x="18" y="472">Registration</text><text x="18" y="490" class="s">Coat check</text>
+        <rect id="m-elev" x="178" y="444" width="172" height="48" rx="12" fill="#fff"/>
+        <text x="190" y="473">Elevators</text>
+        <rect id="m-bath" x="10" y="516" width="102" height="48" rx="12" fill="#fff"/>
+        <text x="18" y="545">Bathrooms</text>
+        <text class="s" x="178" y="521">Side hallway (14-266 to 275)</text>
+        <rect id="m-r269" class="brk" x="178" y="538" width="82" height="84" rx="14" fill="#fff"/>
+        <text x="186" y="574">Room 269</text><text x="186" y="592" class="s">Breakout</text>
+        <rect id="m-r270" class="brk" x="268" y="538" width="82" height="84" rx="14" fill="#fff"/>
+        <text x="276" y="574">Room 270</text><text x="276" y="592" class="s">Breakout</text>
+        <text class="s" x="126" y="330" transform="rotate(-90 140 330)" style="font-weight:600">Corridor</text>
+      </svg>
+      <div class="key"><i style="background:var(--green)"></i>Main room<i style="background:var(--orange)"></i>Posters<i style="background:var(--purple)"></i>Breakouts<i style="background:var(--calm)"></i>Windows</div>
+      <p class="key" id="maphint"></p>
+    </div>
     <div class="label">Walking order along the corridor</div>
     <div class="card">
       <ol class="stops">
@@ -313,6 +359,14 @@ document.addEventListener("click", e => {
   if (e.target.id==="reset") { done = {}; saveDone(); renderFinalists(); }
 });
 
+const HL = {huddle:["reg"],seat:["corr","r220"],welcome:["r220"],finalists:["r220","r290","r285","r280"],gallery:["r290","r285","r280"],
+ ten:["r290","r285","r280","r269","r270"],last:["r290","r285","r280"],tobreak:["r269","r270"],breakouts:["r269","r270","r290","r285","r280"],
+ lunch:["corr","food"],tokeynote:["r220"],keynote:["r220"],break1:["bath","food","r220"],panel:["r220"],break2:["bath","food","r220"],ceremony:["r220"]};
+function renderMap(t){
+  const on = new Set(); STEPS.filter(s=>s.ss<=t && t<s.es).forEach(s=>(HL[s.id]||[]).forEach(x=>on.add(x)));
+  document.querySelectorAll(".map rect[id]").forEach(r=>r.classList.toggle("hl", on.has(r.id.slice(2))));
+  $("maphint").textContent = on.size ? "Dashed outline: where the current step happens." : "";
+}
 let kNow = "", kSched = "";
 function tick(){
   const t = nowSecs();
@@ -323,7 +377,7 @@ function tick(){
   const a = act+"|"+Math.floor(t/60);
   if (a!==kNow) { kNow = a; renderNow(t); }
   const b = act+"|"+STEPS.filter(s=>t>=s.es).length;
-  if (b!==kSched) { kSched = b; renderSchedule(t); }
+  if (b!==kSched) { kSched = b; renderSchedule(t); renderMap(t); }
 }
 renderFinalists(); tick(); setInterval(tick, 1000);
 document.addEventListener("visibilitychange", () => { if (!document.hidden) tick(); });
